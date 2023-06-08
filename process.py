@@ -1,6 +1,6 @@
 import psutil as ps
-from typing import NamedTuple
 import json
+from dataclasses import dataclass
 
 class ProcessEncoder(json.JSONEncoder) :
     def default(self, obj) :
@@ -9,7 +9,8 @@ class ProcessEncoder(json.JSONEncoder) :
         else :
             return super().default(obj)
 
-class Process(NamedTuple):
+@dataclass
+class Process:
     pid: int
     name: str
     mode: str

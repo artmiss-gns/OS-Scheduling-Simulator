@@ -1,5 +1,6 @@
 import psutil as ps
 from typing import NamedTuple
+import json
 
 class Process(NamedTuple):
     pid: int
@@ -31,8 +32,16 @@ def main() :
         if burst_time != 0 :
             p = Process(pid, name, mode, arrival_time, burst_time )
             prev_time = arrival_time
-            print(p)
+            data[pid] = {
+                'name': name,
+                'arrival_time': arrival_time,
+                'mode': mode,
+                'burst_time': burst_time,
+            }
 
+    ### saving data in a json file
+    with open('./process_info.json', 'w') as file :            
+        json.dump(data, file)
 
 if __name__ == "__main__" :
     main() 

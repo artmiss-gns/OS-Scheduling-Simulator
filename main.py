@@ -1,5 +1,6 @@
 from process import Process
 from RR import RR_algorithm
+from SJF import SJF_algorithm
 
 import json 
 from queue import deque
@@ -63,7 +64,7 @@ def main() :
 
     # start the scheduling algorithms
     execute(queue=root_queue, algorithm=RR_algorithm, progress_bar=True, wate_time=0.05)
-    # execute(user_queue, algorithm=SJF_algorithm, progress_bar=True, wate_time=0.05)
+    execute(queue=user_queue, algorithm=SJF_algorithm, progress_bar=True, wate_time=0.05)
     
         
 if __name__ == "__main__" :

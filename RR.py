@@ -1,7 +1,7 @@
 from queue import deque
 from process import Process
 
-def RR_scheduling(queue: deque, *, quantum_time = 0.2) :
+def RR_algorithm(queue: deque, *, quantum_time = 0.2) :
     # the queue is already sorted by arrival time
     while len(queue) :
         current_process = queue.popleft()

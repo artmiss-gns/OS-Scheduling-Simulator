@@ -26,7 +26,8 @@ def get_processes() :
         [
             "pid",
             "name",
-            "create_time"
+            "create_time",
+            "username"
         ]
     )
     for process in process_gen :        
@@ -34,7 +35,7 @@ def get_processes() :
         pid = process.info['pid']
         name = process.info['name']
         arrival_time = round(process.info['create_time'] - first_epoch, 3)
-        mode = 'root' if (name == 'root') else 'user'
+        mode = 'root' if (process.info["username"] == 'root') else 'user'
         burst_time = round(arrival_time - prev_time , 5)
         
         if burst_time != 0 :

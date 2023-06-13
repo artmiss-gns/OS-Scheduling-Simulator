@@ -6,6 +6,8 @@ import json
 from queue import deque
 from tqdm import tqdm
 import time
+from prettytable import PrettyTable
+
 
 def get_processes(process_address='./process_info.json') :    
     class ProcessDecoder(json.JSONDecoder):
@@ -43,6 +45,34 @@ def get_progress_bar(queue, algorithm, wate_time) :
 
     return progress_bar
   
+def show_processes() :
+    processes = get_processes()
+    processes: Process
+    
+    table = PrettyTable()
+    table.field_names = ["PID", "Process Name", "Mode", "Arrival Time", "Burst Time"]
+
+    for process in processes :
+        table.add_row(
+            [       
+            process.pid, 
+            process.name, 
+            process.mode, 
+            round(process.arrival_time, 5),
+            round(process.burst_time, 2),
+            ]
+        )
+    print(table)
+
+
+def menu() :
+    print(''' 
+        1 -> show processes
+        2 -> start the process scheduling
+        3 -> show average wating time
+        4 -> show average turnaround time
+        ''')
+    
 
 def main() :
     '''
@@ -68,4 +98,15 @@ def main() :
     
         
 if __name__ == "__main__" :
-    main()
+    menu()
+    option = input("Choose an option: ")
+    print()
+    
+    if option == '1' :
+        show_processes()
+        
+    elif option == "2" :
+        main()
+    else :
+        pass
+    
